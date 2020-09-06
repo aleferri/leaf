@@ -1,0 +1,23 @@
+{
+    "name": "alessio/leaf",
+    "description": "Very minimal framework for web applications",
+    "type": "library",
+    "autoload": {
+        "psr-0": {
+            "leaf\\": ""
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3",
+        "vimeo/psalm": "^3.14"
+    },
+    "license": "Apache-2",
+    "authors": [
+        {
+            "name": "Alessio Ferri",
+            "email": "alessio.ferri.3012@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
