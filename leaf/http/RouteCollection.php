@@ -23,6 +23,7 @@ class RouteCollection {
 
     public function __construct() {
         $this->injector = function(callable $handler, Request $r, array $params): Response {
+            $params[] = $r;
             return $handler ( ...$params );
         };
         $this->bins = [ [], [], [], [], [], [] ];
