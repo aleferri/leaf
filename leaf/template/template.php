@@ -22,7 +22,7 @@ function render(string $view, array $args): void {
     }
 }
 
-function generate(string $view, array $args): string {
+function process(string $view, array $args): string {
     if ( $view[0] !== '/' && defined( "TEMPLATES_PATH" ) ) {
         $view = \TEMPLATES_PATH . $view;
     }
