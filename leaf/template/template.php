@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace leaf\template;
 
-function render(string $view, array $args): void {
+function render(string $view, array $args = []): void {
     if ( $view[0] !== '/' && defined( "TEMPLATES_PATH" ) ) {
         $view = \TEMPLATES_PATH . $view;
     }
@@ -22,7 +22,7 @@ function render(string $view, array $args): void {
     }
 }
 
-function process(string $view, array $args): string {
+function process(string $view, array $args = []): string {
     if ( $view[0] !== '/' && defined( "TEMPLATES_PATH" ) ) {
         $view = \TEMPLATES_PATH . $view;
     }

@@ -17,6 +17,7 @@ class HTTP {
     public const METHOD_PUT = 3;
     public const METHOD_PATCH = 4;
     public const METHOD_DELETE = 5;
+    
     public const METHOD_TABLE = [
         'GET' => self::METHOD_GET, 'OPTIONS' => self::METHOD_OPTIONS,
         'POST' => self::METHOD_POST, 'PUT' => self::METHOD_PUT,
@@ -24,11 +25,15 @@ class HTTP {
     ];
 
     public static function request(): Request {
+        $input = file_get_contents( 'php://input' );
+        $method_id = self::METHOD_TABLE[ $_SERVER[ 'REQUEST_METHOD' ] ];
+        
         return new SimpleRequest (
-            self::METHOD_TABLE[ $_SERVER[ 'REQUEST_METHOD' ] ],
-            $_SERVER[ 'REQUEST_URI' ], $_GET,
+            $method_id,
+            $_SERVER[ 'REQUEST_URI' ], 
+            $_GET,
             apache_request_headers (),
-            new RequestContent ()
+            new RequestContent ( $_POST, $input )
         );
     }
 
@@ -50,6 +55,10 @@ class HTTP {
         $headers[ 'Content-Type' ] = 'text/html';
 
         return new SimpleResponse ( $http_code, $headers, $body );
+    }
+    
+    public static function redirect(string $location): Response {
+        return new SimpleResponse ( 301, [ 'Location' => $location ], '' );
     }
 
 }
