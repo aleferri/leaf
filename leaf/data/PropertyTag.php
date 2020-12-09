@@ -2,7 +2,7 @@
 
 namespace leaf\data;
 
-class SchemaTag implements Tag {
+class Property implements Tag {
 
     private $name;
     private $value;
@@ -24,10 +24,10 @@ class SchemaTag implements Tag {
     }
 
     public function compare(Tag $b): bool {
-        if ( $b->name() !== $this->name ) {
+        if ( $b->name () !== $this->name ) {
             return false;
         }
-        if ( $b->value() !== $this->value ) {
+        if ( $b->value () !== $this->value ) {
             return false;
         }
         return true;
