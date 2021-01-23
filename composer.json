@@ -6,7 +6,11 @@
         "psr-0": {
             "leaf\\": ""
         },
-        "files": [ "leaf\\template\\template.php", "leaf\\lambda\\foundation.php" ]
+        "files": [
+            "leaf\\template\\template.php",
+            "leaf\\lambda\\foundation.php",
+            "leaf\\data\\factory.php"
+        ]
     },
     "require-dev": {
         "phpunit/phpunit": "^9.3",

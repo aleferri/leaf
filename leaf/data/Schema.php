@@ -36,6 +36,6 @@ interface Schema extends \IteratorAggregate {
     /**
      * Clone schema
      */
-    public function clone(): Schema;
+    public function clone(string $new_name): Schema;
 
 }

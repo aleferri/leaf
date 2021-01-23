@@ -23,7 +23,7 @@ class Property implements Tag {
         return $this->value;
     }
 
-    public function compare(Tag $b): bool {
+    public function equals(Tag $b): bool {
         if ( $b->name () !== $this->name ) {
             return false;
         }

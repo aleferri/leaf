@@ -12,10 +12,22 @@ interface Tag {
     public const INDEX_KEY = "INDEX";
     public const UNIQUE_KEY = "UNIQUE";
 
+    /**
+     * Name of the tag
+     * @return string
+     */
     public function name(): string;
 
+    /**
+     * Value of the tag
+     */
     public function value();
 
-    public function compare(Tag $b): bool;
+    /**
+     * Compare tag to other tag
+     * @param Tag $b other tag to test
+     * @return bool true if equals, false otherwise
+     */
+    public function equals(Tag $b): bool;
 
 }

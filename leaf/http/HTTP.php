@@ -33,7 +33,7 @@ class HTTP {
             $_SERVER[ 'REQUEST_URI' ], 
             $_GET,
             apache_request_headers (),
-            new RequestContent ( $_POST, $input )
+            new RequestContent ( $input, $_POST )
         );
     }
 
