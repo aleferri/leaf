@@ -33,13 +33,13 @@ Leaf is PHP library for basic HTTP request routing
 
         $routes->get( '/api/awesome/v1/@object', function( string $object, Request $r ) {
             if ( $object === 'ok' ) {
-                return new SimpleRequest( 200, [ 'Content-Type' => 'application/json' ], json_encode( [ 'success' => true ] ) );
+                return new SimpleResponse( 200, [ 'Content-Type' => 'application/json' ], json_encode( [ 'success' => true ] ) );
             } else {
                 $get_query = $r->query();
                 if ( isset( $r[ 'id' ] ) ) {
                     //etc
                 }
-                return new SimpleRequest( 200, [ 'Content-Type' => 'application/json' ], json_encode( [ 'success' => true, 'data' => [] ] ) );
+                return new SimpleResponse( 200, [ 'Content-Type' => 'application/json' ], json_encode( [ 'success' => true, 'data' => [] ] ) );
             }
         };
 
