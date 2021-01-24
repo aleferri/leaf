@@ -2,11 +2,19 @@
 
 namespace leaf\data;
 
-class Property implements Tag {
+class PropertyTag implements Tag {
 
     private $name;
+    
+    /**
+     * @var mixed $value
+     */
     private $value;
 
+    /**
+     * @param string $name name of the tag
+     * @param mixed $value value of the tag
+     */
     public function __construct(string $name, $value) {
         $this->name = $name;
         $this->value = $value;

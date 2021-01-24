@@ -12,9 +12,18 @@ use leaf\data;
  */
 class AccessListSchema implements \leaf\data\Schema {
 
+    /**
+     * @var array<\leaf\data\Property> $properties
+     */
     private $properties;
+    
+    /**
+     * @var string $name
+     */
+    private $name;
 
-    public function __construct() {
+    public function __construct(string $name = 'sec_access_lists') {
+    	$this->name = $name;
         $this->properties = [
             data\progressive ( 'rule_id' ),
             data\text ( 'match', 255 ),
@@ -24,12 +33,12 @@ class AccessListSchema implements \leaf\data\Schema {
         ];
     }
 
-    public function clone(): \leaf\data\Schema {
-        return new self();
+    public function clone(string $new_name): \leaf\data\Schema {
+        return new self( $new_name );
     }
 
     public function getIterator(): \Traversable {
-        return $this->properties;
+        return new \ArrayIterator($this->properties);
     }
 
     public function indexes(): array {

@@ -33,6 +33,18 @@ class SimpleResponse implements Response {
         return $this;
     }
 
+    public function with_header(string $header, string $value): Response {
+        $this->headers[ $header ] = $value;
+
+        return $this;
+    }
+
+    public function without_header(string $header): Response {
+        unset ( $this->headers[ $header ] );
+
+        return $this;
+    }
+
     public function with_body(string $body): Response {
         $this->body = $body;
 

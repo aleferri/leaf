@@ -38,11 +38,29 @@ function all(iterable $iter, callable $condition): bool {
 /**
  * Filter an array and return the filtered elements
  */
-function filter(iterable $iter, callable $filter): array {
+function filter_in(iterable $iter, callable $filter): array {
     $filtered = [];
 
     foreach ( $iter as $k => $elem ) {
         if ( $filter ( $elem ) ) {
+            $filtered[ $k ] = $elem;
+        }
+    }
+
+    return $filtered;
+}
+
+/**
+ * Filter an array and return the unfiltered
+ * @param iterable $iter iterable to iterate over
+ * @param callable $filter filter to apply
+ * @return array unfiltered list
+ */
+function filter_out(iterable $iter, callable $filter): array {
+    $filtered = [];
+
+    foreach ( $iter as $k => $elem ) {
+        if ( ! $filter ( $elem ) ) {
             $filtered[ $k ] = $elem;
         }
     }

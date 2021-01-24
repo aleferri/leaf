@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace leaf\log;
 
 /**
- * LoggerInterface like interface, except it doesn't require an additional useless class LogLevel and has a shorter name
+ * LoggerInterface-like interface, except it doesn't require an additional useless class LogLevel and has a shorter name
  */
 interface Logger {
 

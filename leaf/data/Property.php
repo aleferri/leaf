@@ -22,8 +22,10 @@ interface Property {
 
     /**
      * Return tag by name
+     *
      * @param string $tag_name
-     * @return array the tag
+     *
+     * @return Tag|null
      */
     public function tag_by_name(string $tag_name): ?Tag;
 

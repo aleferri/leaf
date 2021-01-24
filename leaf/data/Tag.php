@@ -20,6 +20,7 @@ interface Tag {
 
     /**
      * Value of the tag
+     * @return mixed
      */
     public function value();
 

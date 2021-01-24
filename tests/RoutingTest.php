@@ -3,7 +3,11 @@
 use PHPUnit\Framework\TestCase;
 use \leaf\http\SimpleRouter;
 use \leaf\http\SimpleRequest;
+use \leaf\http\RequestContent;
+use \leaf\http\Response;
 use \leaf\http\SimpleResponse;
+use \leaf\http\RouteCollection;
+use \leaf\http\HTTP;
 
 final class RoutingTest extends TestCase {
 
@@ -11,11 +15,11 @@ final class RoutingTest extends TestCase {
         $default = new SimpleResponse ( 404 );
 
         $router = new SimpleRouter ( $default );
-        $collection = new \leaf\http\RouteCollection();
+        $collection = new RouteCollection();
 
         $empty_query = [];
 
-        $request = new SimpleRequest ( \leaf\http\HTTP::METHOD_GET, '/404', $empty_query, [], new \leaf\http\RequestContent () );
+        $request = new SimpleRequest ( HTTP::METHOD_GET, '/404', $empty_query, [], new RequestContent () );
 
         $response = $router->route ( $request, $collection );
 
@@ -34,10 +38,10 @@ final class RoutingTest extends TestCase {
         };
 
         $router = new SimpleRouter ( $default );
-        $collection = new \leaf\http\RouteCollection();
+        $collection = new RouteCollection();
         $collection->get ( '/@name', $route );
 
-        $request = new SimpleRequest ( \leaf\http\HTTP::METHOD_GET, '/anything', [], [], new \leaf\http\RequestContent () );
+        $request = new SimpleRequest ( HTTP::METHOD_GET, '/anything', [], [], new RequestContent () );
 
         $response = $router->route ( $request, $collection );
 
@@ -49,28 +53,27 @@ final class RoutingTest extends TestCase {
     public function testMultiRoute(): void {
         $default = new SimpleResponse ( 404 );
 
-        $request = new SimpleRequest ( \leaf\http\HTTP::METHOD_GET, '/api/protected/v1/ok', [], [], new \leaf\http\RequestContent () );
+        $request = new SimpleRequest ( HTTP::METHOD_GET, '/api/protected/v1/ok', [], [], new RequestContent () );
 
         $router = new SimpleRouter ( $default );
-        $collection = new \leaf\http\RouteCollection();
+        $collection = new RouteCollection();
 
-        $self = $this;
 
-        $protected = function() use($router, $request, $self): \leaf\http\Response {
-            $bottomRoutes = new \leaf\http\RouteCollection();
-            $bottomRoutes->get ( '/api/protected/v1/@name', function(string $name): \leaf\http\Response {
-                return new \leaf\http\SimpleResponse ( 200, [], "OK" );
+        $protected = function() use($router, $request): Response {
+            $bottomRoutes = new RouteCollection();
+            $bottomRoutes->get ( '/api/protected/v1/@name', function(string $name): Response {
+                return new SimpleResponse ( 200, [], "OK {$name}" );
             } );
 
             $response = $router->route ( $request, $bottomRoutes );
-            $this->assertEquals ( $response->body (), "OK" );
+            $this->assertEquals ( $response->body (), "OK ok" );
             return $response;
         };
 
         $collection->get ( '/api/protected/*', $protected );
 
         $response = $router->route ( $request, $collection );
-        $this->assertEquals ( $response->body (), "OK" );
+        $this->assertEquals ( $response->body (), "OK ok" );
         $this->assertEquals ( $response->status (), 200 );
     }
 
