@@ -46,7 +46,7 @@ class AccessListSchema implements \leaf\data\Schema {
     }
 
     public function name(): string {
-        return "sec_access_lists";
+        return $this->name;
     }
 
     public function progressive_key(): string {

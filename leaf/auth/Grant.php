@@ -20,5 +20,11 @@ interface Grant {
      * Check if a Grant includes another Grant
      */
     public function includes(Grant $g): bool;
+    
+    /**
+     * 
+     * @return mixed
+     */
+    public function serialize();
 
 }

@@ -9,11 +9,13 @@ declare(strict_types=1);
 
 namespace leaf\loader;
 
+use \leaf\http\RouteCollection;
+
 class Loader {
 
     private $routes;
 
-    public function __construct(\leaf\http\RouteCollection $routes) {
+    public function __construct(RouteCollection $routes) {
         $this->routes = $routes;
     }
 
@@ -31,7 +33,7 @@ class Loader {
         }
     }
 
-    public function routes(): \leaf\http\RouteCollection {
+    public function routes(): RouteCollection {
         return $this->routes;
     }
 
