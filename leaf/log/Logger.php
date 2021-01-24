@@ -11,6 +11,7 @@ namespace leaf\log;
 
 /**
  * LoggerInterface-like interface, except it doesn't require an additional useless class LogLevel and has a shorter name
+ * LogLevel description is provided by independent constants by PHP
  */
 interface Logger {
 
